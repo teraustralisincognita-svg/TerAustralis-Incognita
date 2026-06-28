@@ -307,7 +307,7 @@
                     </span>
                     <span>
                       <span class="block text-sm font-semibold text-ink group-hover:text-violet">Email us directly</span>
-                      <span class="block text-xs text-muted">Opens your mail app — comes straight to our inbox</span>
+                      <span id="emailUsNote" class="block text-xs text-muted">Tap to copy our address &amp; open your mail app</span>
                     </span>
                   </button>
                 </li>
@@ -419,11 +419,19 @@
       // Email button: address is base64-encoded so it isn't sitting in the page as plain text.
       var eb = document.getElementById('emailUsBtn');
       if (eb) { eb.addEventListener('click', function () {
-        try {
-          var addr = atob(eb.getAttribute('data-e'));
-          var subj = encodeURIComponent('TerAustralis Incognita — enquiry');
-          window.location.href = 'mailto:' + addr + '?subject=' + subj;
-        } catch (e) {}
+        var addr;
+        try { addr = atob(eb.getAttribute('data-e')); } catch (e) { return; }
+        var note = document.getElementById('emailUsNote');
+        // Reliable fallback: copy the address and reveal it, so it works even
+        // when there's no default mail app (e.g. webmail users on desktop).
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(addr).then(function () {
+            if (note) note.textContent = addr + ' — copied, paste into your email';
+          }).catch(function () { if (note) note.textContent = addr; });
+        } else if (note) { note.textContent = addr; }
+        // Also try to open a mail app for those who have one.
+        var subj = encodeURIComponent('TerAustralis Incognita — enquiry');
+        window.location.href = 'mailto:' + addr + '?subject=' + subj;
       }); }
     })();
   </script>

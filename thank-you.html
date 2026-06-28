@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank you — TerAustralis Incognita</title>
+  <meta name="description" content="Thank you — your message has reached TerAustralis Incognita. We read every message and will reply soon." />
+  <meta property="og:title" content="Thank you — TerAustralis Incognita" />
+  <meta property="og:description" content="Your message has reached us — thank you." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    // Silence the Tailwind Play-CDN production notice (dev convenience only).
+    (function () {
+      var warn = console.warn.bind(console);
+      console.warn = function () {
+        try {
+          var m = arguments[0];
+          if (typeof m === "string" && (m.indexOf("cdn.tailwindcss.com") !== -1 || m.indexOf("should not be used in production") !== -1)) return;
+        } catch (e) {}
+        return warn.apply(console, arguments);
+      };
+    })();
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: {
+          space:  { DEFAULT: '#08070F', 800: '#100E1B', 700: '#181527' },
+          violet: { DEFAULT: '#8B5CF6', light: '#A78BFA', dark: '#6D28D9' },
+          pink:   { DEFAULT: '#EC4899', light: '#F472B6' },
+          green:  { DEFAULT: '#34D399', light: '#6EE7B7' },
+          amber:  { DEFAULT: '#F8A23B', light: '#FCC265' },
+          ink: '#ECEDF4', silver: '#C7CBD4', muted: '#F1F1F6'
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+        }
+      } }
+    };
+  </script>
+  <style>
+    html, body { background-color: #08070F !important; color: #ECEDF4 !important; }
+    #main { background-color: #08070F !important; }
+    /* ===== Cosmic starfield + nebula ===== */
+    .star-field { position: relative; z-index: 0; background-color: #08070F; }
+    .star-field::before, .star-field::after {
+      content: ""; position: absolute; inset: -40% -10%; z-index: -1;
+      pointer-events: none; background-repeat: repeat;
+    }
+    .star-field::before {
+      background-size: 220px 220px;
+      background-image:
+        radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,.9), transparent 60%),
+        radial-gradient(1px 1px at 28% 42%, rgba(199,203,212,.8), transparent 60%),
+        radial-gradient(1.5px 1.5px at 64% 58%, rgba(255,255,255,.85), transparent 60%),
+        radial-gradient(1px 1px at 82% 30%, rgba(199,203,212,.7), transparent 60%),
+        radial-gradient(1px 1px at 45% 82%, rgba(255,255,255,.75), transparent 60%),
+        radial-gradient(1px 1px at 8% 68%, rgba(255,255,255,.6), transparent 60%),
+        radial-gradient(1.5px 1.5px at 90% 78%, rgba(255,255,255,.8), transparent 60%),
+        radial-gradient(1px 1px at 54% 12%, rgba(199,203,212,.7), transparent 60%);
+      animation: starDrift 120s ease-in-out infinite alternate, twinkle 7s ease-in-out infinite alternate;
+    }
+    .star-field::after {
+      background-size: 340px 340px;
+      background-image:
+        radial-gradient(1.5px 1.5px at 20% 30%, rgba(139,92,246,.9), transparent 55%),
+        radial-gradient(2px 2px at 70% 20%, rgba(236,72,153,.7), transparent 55%),
+        radial-gradient(1.5px 1.5px at 85% 65%, rgba(248,162,59,.85), transparent 55%),
+        radial-gradient(1.5px 1.5px at 35% 75%, rgba(255,255,255,.9), transparent 55%),
+        radial-gradient(2px 2px at 55% 50%, rgba(139,92,246,.6), transparent 55%),
+        radial-gradient(1.5px 1.5px at 12% 88%, rgba(236,72,153,.6), transparent 55%);
+      animation: starDrift 160s ease-in-out infinite alternate-reverse, twinkle 9s ease-in-out 1.5s infinite alternate;
+    }
+    .hero-glow {
+      background:
+        radial-gradient(55% 50% at 50% -8%, rgba(139,92,246,.30), transparent 70%),
+        radial-gradient(42% 45% at 85% 16%, rgba(236,72,153,.22), transparent 72%),
+        radial-gradient(45% 45% at 8% 90%, rgba(52,211,153,.16), transparent 72%),
+        radial-gradient(30% 30% at 75% 88%, rgba(248,162,59,.12), transparent 72%);
+    }
+    .shooting-star {
+      position: absolute; top: 14%; left: 0; z-index: -1; width: 160px; height: 1.5px;
+      background: linear-gradient(90deg, rgba(248,162,59,0), rgba(248,162,59,.95));
+      filter: drop-shadow(0 0 6px rgba(248,162,59,.55)); transform: rotate(16deg);
+      opacity: 0; pointer-events: none; animation: shoot 14s ease-in 5s infinite;
+    }
+    .cosmic { color: #C4B5FD; }
+    @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+      .cosmic { background: linear-gradient(92deg, #A78BFA, #EC4899); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    }
+    .focus-ring:focus-visible { outline: 2px solid #8B5CF6; outline-offset: 2px; border-radius: 8px; }
+    @keyframes starDrift { from { transform: translateY(-3%); } to { transform: translateY(3%); } }
+    @keyframes twinkle { from { opacity: .7; } to { opacity: 1; } }
+    @keyframes shoot {
+      0% { transform: translate(-5vw, 0) rotate(16deg); opacity: 0; }
+      3% { opacity: 1; }
+      14% { transform: translate(110vw, 34vh) rotate(16deg); opacity: 0; }
+      100% { opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .star-field::before, .star-field::after { animation: none; }
+      .shooting-star { display: none; }
+    }
+    /* form fields */
+    .field { width:100%; border-radius:0.5rem; border:1px solid rgba(255,255,255,.10); background:#08070F; padding:0.75rem 1rem; font-size:0.875rem; color:#ECEDF4; }
+    .field::placeholder { color: rgba(142,148,166,.6); }
+    .field:focus-visible { outline:2px solid #8B5CF6; outline-offset:2px; border-color: rgba(139,92,246,.5); }
+    select.field { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%238E94A6' stroke-width='1.8' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 0.9rem center; padding-right:2.5rem; }
+    .hero-photo { background-image: url("images/hero.jpg"); background-size: cover; background-position: center; }
+  </style>
+</head>
+<body style="background-color:#08070F;color:#ECEDF4" class="bg-space text-ink font-sans antialiased selection:bg-violet/30 selection:text-white">
+
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-lg focus:bg-violet focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-space">Skip to content</a>
+
+  <!-- ================= NAV ================= -->
+  <header class="sticky top-0 z-50 border-b border-white/5 bg-space/80 backdrop-blur-md">
+    <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8" aria-label="Primary">
+      <a href="index.html" class="focus-ring flex items-center gap-3">
+        <span class="relative inline-flex h-9 w-9 items-center justify-center rounded-lg bg-space-700 ring-1 ring-violet/30">
+          <svg viewBox="0 0 32 32" class="h-6 w-6" aria-hidden="true" fill="#8B5CF6"><circle cx="16" cy="6" r="1.7"/><circle cx="9" cy="15" r="1.7"/><circle cx="22.5" cy="12.5" r="1.5"/><circle cx="16" cy="26" r="1.9"/><circle cx="19" cy="19.5" r="1"/></svg>
+        </span>
+        <span class="font-display text-base font-semibold tracking-tight">TerAustralis <span class="text-violet">Incognita</span></span>
+      </a>
+      <div class="hidden items-center gap-7 text-sm md:flex">
+        <a href="index.html" class="focus-ring text-muted transition-colors hover:text-ink">Home</a>
+        <a href="vision.html" class="focus-ring text-muted transition-colors hover:text-ink">Vision</a>
+        <a href="foundations.html" class="focus-ring text-muted transition-colors hover:text-ink">Foundations</a>
+        <a href="approach.html" class="focus-ring text-muted transition-colors hover:text-ink">Approach</a>
+        <a href="momentum.html" class="focus-ring text-muted transition-colors hover:text-ink">Momentum</a>
+        <a href="support.html" class="focus-ring text-muted transition-colors hover:text-ink">Support</a>
+        <a href="concepts.html" class="focus-ring text-muted transition-colors hover:text-ink">Concepts</a>
+        <a href="get-involved.html" class="focus-ring ml-1 inline-flex items-center rounded-full bg-violet px-4 py-2 font-semibold text-space transition hover:bg-violet-light">Get Involved</a>
+      </div>
+      <button id="navToggle" class="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-lg text-ink md:hidden" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"/></svg>
+      </button>
+    </nav>
+    <div id="mobileMenu" class="hidden border-t border-white/5 bg-space-800 md:hidden">
+      <div class="flex flex-col gap-1 px-5 py-4 text-sm">
+        <a href="index.html" class="rounded-lg px-3 py-2 text-muted hover:bg-white/5 hover:text-ink">Home</a>
+        <a href="vision.html" class="rounded-lg px-3 py-2 text-muted hover:bg-white/5 hover:text-ink">Vision</a>
+        <a href="foundations.html" class="rounded-lg px-3 py-2 text-muted hover:bg-white/5 hover:text-ink">Foundations</a>
+        <a href="approach.html" class="rounded-lg px-3 py-2 text-muted hover:bg-white/5 hover:text-ink">Approach</a>
+        <a href="momentum.html" class="rounded-lg px-3 py-2 text-muted hover:bg-white/5 hover:text-ink">Momentum</a>
+        <a href="support.html" class="rounded-lg px-3 py-2 text-muted hover:bg-white/5 hover:text-ink">Support</a>
+        <a href="concepts.html" class="rounded-lg px-3 py-2 text-muted hover:bg-white/5 hover:text-ink">Concepts</a>
+        <a href="get-involved.html" class="mt-1 rounded-lg bg-violet px-3 py-2 font-semibold text-space">Get Involved</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" style="background-color:#08070F">
+
+    <!-- ================= THANK YOU ================= -->
+    <section class="relative flex min-h-[72vh] items-center overflow-hidden star-field hero-photo">
+      <div class="absolute inset-0 hero-glow"></div>
+        <span class="shooting-star" aria-hidden="true"></span>
+      <div class="absolute inset-0" style="background:linear-gradient(180deg, rgba(8,7,15,.80), rgba(8,7,15,.6) 50%, #08070F)"></div>
+      <div class="relative mx-auto max-w-3xl px-5 py-24 text-center sm:px-8">
+        <span class="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-full bg-green/15 ring-1 ring-green/40">
+          <svg class="h-8 w-8 text-green-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7"/></svg>
+        </span>
+        <span class="mt-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-green"><span class="h-px w-6 bg-green/60"></span> Message received</span>
+        <h1 class="bg-[linear-gradient(100deg,#4C8DFF,#A78BFA,#EC4899,#F8B14B)] bg-clip-text text-transparent mt-5 font-display text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl">Thank you &mdash; your message has reached us.</h1>
+        <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted">We read every message that comes through, and we'll only use your details to reply. We'll be in touch soon.</p>
+        <p class="mt-4 font-display text-sm tracking-wide text-violet/80">From Red Dust to Rockets &middot; Songlines to Starlines &middot; Dreamtime to Deep Space</p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a href="index.html" class="focus-ring inline-flex items-center gap-2 rounded-full bg-violet px-6 py-3 text-sm font-semibold text-space transition hover:bg-violet-light">Back to home</a>
+          <a href="vision.html" class="focus-ring inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-ink transition hover:border-violet/40 hover:text-violet">Explore the Vision &rarr;</a>
+        </div>
+        <p class="mt-10 text-sm text-muted/80">In the meantime, you can <a href="support.html" class="focus-ring font-semibold text-violet underline decoration-violet/40 underline-offset-2 transition hover:text-violet-light">support the mission</a> or browse the <a href="concepts.html" class="focus-ring font-semibold text-violet underline decoration-violet/40 underline-offset-2 transition hover:text-violet-light">Concepts</a>.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t border-white/5 bg-space-800">
+    <div class="mx-auto max-w-7xl px-5 py-14 sm:px-8">
+      <div class="grid gap-10 md:grid-cols-12">
+        <div class="md:col-span-5">
+          <div class="flex items-center gap-3">
+            <span class="relative inline-flex h-9 w-9 items-center justify-center rounded-lg bg-space-700 ring-1 ring-violet/30">
+              <svg viewBox="0 0 32 32" class="h-6 w-6" aria-hidden="true" fill="#8B5CF6"><circle cx="16" cy="6" r="1.7"/><circle cx="9" cy="15" r="1.7"/><circle cx="22.5" cy="12.5" r="1.5"/><circle cx="16" cy="26" r="1.9"/><circle cx="19" cy="19.5" r="1"/></svg>
+            </span>
+            <span class="font-display text-base font-semibold tracking-tight">TerAustralis <span class="text-violet">Incognita</span></span>
+          </div>
+          <p class="mt-4 max-w-sm text-sm leading-relaxed text-muted">A coordination and advocacy initiative for sovereign Australian space capability — built by Aussies, for Aussies.</p>
+          <p class="mt-4 font-display text-xs tracking-wide text-violet/80">Songlines to Starlines · Red Dust to Rockets · Dreamtime to Deep Space</p>
+        </div>
+        <div class="md:col-span-3">
+          <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Explore</h3>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li><a href="index.html" class="focus-ring text-muted transition-colors hover:text-violet">Home</a></li>
+            <li><a href="vision.html" class="focus-ring text-muted transition-colors hover:text-violet">Vision</a></li>
+            <li><a href="foundations.html" class="focus-ring text-muted transition-colors hover:text-violet">Foundations</a></li>
+            <li><a href="approach.html" class="focus-ring text-muted transition-colors hover:text-violet">Approach</a></li>
+            <li><a href="momentum.html" class="focus-ring text-muted transition-colors hover:text-violet">Momentum</a></li>
+            <li><a href="concepts.html" class="focus-ring text-muted transition-colors hover:text-violet">Concepts</a></li>
+            <li><a href="get-involved.html" class="focus-ring text-muted transition-colors hover:text-violet">Get Involved</a></li>
+          </ul>
+        </div>
+        <div class="md:col-span-4">
+          <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Connect</h3>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li><a href="https://x.com/m13crystalat" class="focus-ring text-muted transition-colors hover:text-violet" target="_blank" rel="noopener">X — @m13crystalat</a></li>
+            <li><a href="https://www.linkedin.com/in/crystal-arena-turner-3177b0411" class="focus-ring text-muted transition-colors hover:text-violet" target="_blank" rel="noopener">LinkedIn — Crystal Arena-Turner</a></li>
+            <li><a href="#" class="focus-ring text-muted transition-colors hover:text-violet">Second Founding</a></li>
+            <li><a href="support.html" class="focus-ring text-muted transition-colors hover:text-violet">Support the mission</a></li>
+            <li><a href="get-involved.html" class="focus-ring text-muted transition-colors hover:text-violet">Expression of interest</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-12 border-t border-white/5 pt-8">
+        <p class="max-w-3xl text-xs leading-relaxed text-muted/80">TerAustralis Incognita acknowledges the Traditional Owners of Country throughout Australia and their continuing connection to land, waters, sky and community. We pay our respects to Elders past and present, and recognise that a sovereign future is built on honesty and consent.</p>
+        <p class="mt-6 text-xs leading-relaxed text-muted/70">© <span id="year">2026</span> TerAustralis Incognita™. Written content licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="underline decoration-white/20 underline-offset-2 transition hover:text-violet" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a>; site code and all other rights reserved. The TerAustralis Incognita name and logo are trademarks of the project.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var t = document.getElementById('navToggle'); var m = document.getElementById('mobileMenu');
+      if (t && m) { t.addEventListener('click', function () { var hidden = m.classList.toggle('hidden'); t.setAttribute('aria-expanded', String(!hidden)); }); }
+      var y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+      // Email button: address is base64-encoded so it isn't sitting in the page as plain text.
+      var eb = document.getElementById('emailUsBtn');
+      if (eb) { eb.addEventListener('click', function () {
+        var addr;
+        try { addr = atob(eb.getAttribute('data-e')); } catch (e) { return; }
+        var note = document.getElementById('emailUsNote');
+        // Reliable fallback: copy the address and reveal it, so it works even
+        // when there's no default mail app (e.g. webmail users on desktop).
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(addr).then(function () {
+            if (note) note.textContent = addr + ' — copied, paste into your email';
+          }).catch(function () { if (note) note.textContent = addr; });
+        } else if (note) { note.textContent = addr; }
+        // Also try to open a mail app for those who have one.
+        var subj = encodeURIComponent('TerAustralis Incognita — enquiry');
+        window.location.href = 'mailto:' + addr + '?subject=' + subj;
+      }); }
+    })();
+  </script>
+</body>
+</html>

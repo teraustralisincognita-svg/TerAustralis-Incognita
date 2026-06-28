@@ -242,14 +242,7 @@
             <h2 class="bg-[linear-gradient(100deg,#4C8DFF,#A78BFA,#EC4899,#F8B14B)] bg-clip-text text-transparent mt-5 font-display text-3xl font-bold tracking-tight">Register your interest.</h2>
             <p class="mt-4 text-base leading-relaxed text-muted">Tell us a little about you and how you'd like to be involved. We read every message, and we'll only use your details to reply.</p>
 
-            <!--
-              TODO: wire this form up before launch.
-              This static site has no backend. Replace the action URL below with your own
-              endpoint — e.g. a free Formspree form (https://formspree.io): create a form,
-              then paste its URL here as action="https://formspree.io/f/XXXXXXXX".
-              Alternatives: Netlify Forms, Getform, Basin, or a Google Form embed.
-            -->
-            <form action="https://formspree.io/f/your-form-id" method="POST" class="mt-8 space-y-5">
+            <form action="https://formspree.io/f/mzdlgwev" method="POST" class="mt-8 space-y-5">
               <input type="hidden" name="_subject" value="New TerAustralis Incognita expression of interest" />
 
               <div class="grid gap-5 sm:grid-cols-2">
@@ -307,7 +300,7 @@
                     </span>
                     <span>
                       <span class="block text-sm font-semibold text-ink group-hover:text-violet">Email us directly</span>
-                      <span class="block text-xs text-muted">Opens your mail app — comes straight to our inbox</span>
+                      <span id="emailUsNote" class="block text-xs text-muted">Tap to copy our address &amp; open your mail app</span>
                     </span>
                   </button>
                 </li>
@@ -419,11 +412,19 @@
       // Email button: address is base64-encoded so it isn't sitting in the page as plain text.
       var eb = document.getElementById('emailUsBtn');
       if (eb) { eb.addEventListener('click', function () {
-        try {
-          var addr = atob(eb.getAttribute('data-e'));
-          var subj = encodeURIComponent('TerAustralis Incognita — enquiry');
-          window.location.href = 'mailto:' + addr + '?subject=' + subj;
-        } catch (e) {}
+        var addr;
+        try { addr = atob(eb.getAttribute('data-e')); } catch (e) { return; }
+        var note = document.getElementById('emailUsNote');
+        // Reliable fallback: copy the address and reveal it, so it works even
+        // when there's no default mail app (e.g. webmail users on desktop).
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(addr).then(function () {
+            if (note) note.textContent = addr + ' — copied, paste into your email';
+          }).catch(function () { if (note) note.textContent = addr; });
+        } else if (note) { note.textContent = addr; }
+        // Also try to open a mail app for those who have one.
+        var subj = encodeURIComponent('TerAustralis Incognita — enquiry');
+        window.location.href = 'mailto:' + addr + '?subject=' + subj;
       }); }
     })();
   </script>

@@ -127,3 +127,33 @@ See <https://tailwindcss.com/docs/installation>.
   `prefers-reduced-motion`.
 - **Accessibility** is built in: a skip link, visible gold focus rings, an accessible
   mobile menu toggle, and labelled form fields. Preserve these if you refactor.
+
+---
+
+## Licensing & intellectual property
+
+This project is **dual-licensed**, with the code and the written content under
+different terms:
+
+| What | Licence | What it allows |
+|------|---------|----------------|
+| **Site source code** (HTML, config, styles, scripts) | Proprietary — all rights reserved (`LICENSE`) | View source for personal reference only. No copying, redeploying, or building a derivative/competing site without written permission. |
+| **Written content** (vision text, Foundations, messaging) | [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) (`LICENSE-CC-BY-NC-ND-4.0`) | Share with **attribution**, **non-commercial** use only, and **no derivatives** (no altered re-publishing). |
+
+© 2026 **Crystal Elle Arena-Turner**, trading as **TerAustralis Incognita**.
+
+### A note on what licensing does (and doesn't) do
+
+A licence does **not** physically prevent anyone from copying the site — anyone can
+"view source." What it does is set the legal terms for reuse and give you standing
+if someone breaches them. The terms above are restrictive (share-with-credit only,
+no commercial use, no derivatives), but they are not a technical lock.
+
+### Trademark
+
+**TerAustralis Incognita™** — the name and the logo are claimed as trademarks of the
+project. The ™ symbol signals an unregistered claim. For enforceable protection,
+register the word mark (and logo) with **IP Australia**
+(<https://www.ipaustralia.gov.au>) in the relevant classes. Copyright in the text and
+code is automatic and already owned; trademark is what protects the brand identity,
+and registration is a separate, recommended step.

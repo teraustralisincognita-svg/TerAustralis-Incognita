@@ -1,6 +1,6 @@
 # TerAustralis Incognita — Website
 
-A six-page static marketing site for **TerAustralis Incognita**, a coordination and
+A static marketing site for **TerAustralis Incognita**, a coordination and
 advocacy initiative for sovereign Australian space capability — built on the onshore
 recovery, refining and processing of critical minerals and rare earths.
 
@@ -21,6 +21,7 @@ hosts anywhere.
 | `approach.html` | Approach — how it works, phased compliance, FPIC, Second Founding |
 | `momentum.html` | Momentum — honest progress, receipts, what's next |
 | `get-involved.html` | Get Involved — audiences, expression-of-interest form, contact |
+| `support.html` | Support — kickstart fund, recurring backer tiers, sponsor tiers (Open Collective) |
 
 The navigation and footer are identical on every page (each file is fully
 self-contained), so you can add, remove or rename pages by editing those blocks

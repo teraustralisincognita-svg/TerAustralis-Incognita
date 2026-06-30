@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Vision · Songlines to Starlines — TerAustralis Incognita</title>
+<meta name="description" content="A sovereign Australian future reaching from Country to the stars — the world's oldest living knowledge fused with new technology, built on consent, privacy and care. The vision of TerAustralis Incognita.">
+<meta property="og:title" content="The Vision · Songlines to Starlines — TerAustralis Incognita">
+<meta property="og:description" content="Songlines to Starlines — a sovereign Australian future, dreamed from Country, guided by consent and care.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- SITE FONTS: replace this whole <link> with the live site's font import so faces match. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* =====================================================================
+     SITE TOKENS  —  REPLACE THESE WITH THE LIVE SITE'S REAL VALUES.
+     Identical to the builders.html token block on purpose, so the two new
+     pages stay in sync. Copy the real colour variables (and the fonts
+     above) from the existing site CSS so this page matches exactly.
+     Every colour on the page derives from the variables below.
+     ===================================================================== */
+  :root{
+    --space:#08070F;
+    --space-2:#100E1B;
+    --space-3:#181527;
+    --dust:#F8A23B;
+    --dust-soft:#FCC265;
+    --aurora:#8B5CF6;
+    --aurora-soft:#A78BFA;
+    --star:#EC4899;
+    --ink:#ECEDF4;
+    --ink-dim:#C7CBD4;
+    --line:rgba(255,255,255,0.12);
+    --line-soft:rgba(255,255,255,0.06);
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--space);color:var(--ink);
+    font-family:"Inter",ui-sans-serif,system-ui,sans-serif;
+    font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .eyebrow{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:var(--aurora-soft);display:inline-block}
+  h1,h2,h3{font-family:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;font-weight:600;line-height:1.1;margin:0}
+  h1{font-size:clamp(2.5rem,6vw,4.4rem);letter-spacing:-0.015em}
+  h2{font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-0.01em}
+  h3{font-size:1.2rem;letter-spacing:-0.005em}
+  p{margin:0 0 1.1rem}
+  .skip{position:absolute;left:-999px;top:0;background:var(--star);color:var(--space);padding:10px 16px;border-radius:6px;z-index:200}
+  .skip:focus{left:16px;top:16px}
+
+  /* nav */
+  header.site{position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);background:rgba(10,13,19,0.72);border-bottom:1px solid var(--line-soft)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:"Space Grotesk",ui-sans-serif,sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:-0.01em}
+  .brand .dot{color:var(--dust)}
+  .nav-links{display:flex;gap:22px;align-items:center}
+  .nav-links a{font-size:14px;color:var(--ink-dim);transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a.current{color:var(--star)}
+  .nav-toggle{display:none;background:none;border:0;color:var(--ink);font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:13px;cursor:pointer}
+  @media(max-width:860px){
+    .nav-links{display:none}
+    .nav-links.open{display:flex;position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;background:var(--space-2);border-bottom:1px solid var(--line);padding:8px 0}
+    .nav-links.open a{padding:12px 28px}
+    .nav-toggle{display:block}
+  }
+
+  /* hero (cosmos) */
+  .hero{position:relative;padding:120px 0 96px;overflow:hidden;min-height:78vh;display:flex;align-items:center}
+  .hero canvas.stars{position:absolute;inset:0;z-index:0;pointer-events:none}
+  .hero .glow-sky{position:absolute;top:-28%;left:50%;transform:translateX(-50%);width:120%;height:60%;background:radial-gradient(ellipse at center,rgba(79,178,192,0.16),transparent 62%);filter:blur(8px);z-index:0;pointer-events:none}
+  .hero .glow-dust{position:absolute;bottom:-40%;left:50%;transform:translateX(-50%);width:130%;height:70%;background:radial-gradient(ellipse at center,rgba(196,90,52,0.18),transparent 60%);filter:blur(8px);z-index:0;pointer-events:none}
+  .hero .wrap{position:relative;z-index:2}
+  .hero h1{margin:18px 0 0;max-width:15ch}
+  .hero .lede{font-size:clamp(1.05rem,1.9vw,1.32rem);color:var(--ink);max-width:56ch;margin-top:24px}
+  .hero .lede .em{color:var(--star)}
+  .tagline{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:13px;letter-spacing:0.04em;color:var(--ink-dim);margin-top:30px}
+  .tagline .sep{color:var(--dust)}
+
+  /* sections */
+  section{position:relative;padding:78px 0}
+  .section-head{max-width:62ch}
+  .section-head h2{margin-top:14px}
+  .section-head .sub{color:var(--ink-dim);margin-top:16px;font-size:1.05rem}
+  .divider{height:1px;background:var(--line-soft);max-width:var(--maxw);margin:0 auto}
+  .lead-para{font-size:1.18rem;max-width:64ch;color:var(--ink)}
+  .lead-para .em{color:var(--star)}
+
+  .alt{background:var(--space-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+
+  /* names grid */
+  .names{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:34px}
+  .names .name{padding:24px 24px;border:1px solid var(--line);border-radius:10px;background:var(--space-3)}
+  .names .tag{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--aurora-soft)}
+  .names h3{margin:12px 0 8px;color:var(--star)}
+  .names p{font-size:0.98rem;color:var(--ink-dim);margin:0}
+  .names p a{color:var(--aurora-soft);border-bottom:1px solid var(--line)}
+  @media(max-width:680px){.names{grid-template-columns:1fr}}
+
+  /* feature rows (seven sisters, symbolism) */
+  .feature .lead-para{margin-top:14px}
+  .symbols{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
+  .symbols .sym{padding:22px 18px;border:1px solid var(--line-soft);border-radius:8px;background:var(--space);text-align:center}
+  .symbols .glyph{font-size:1.7rem;line-height:1;color:var(--star)}
+  .symbols h3{font-size:0.98rem;margin:14px 0 6px}
+  .symbols p{font-size:0.85rem;color:var(--ink-dim);margin:0}
+  @media(max-width:680px){.symbols{grid-template-columns:repeat(2,1fr)}}
+
+  /* constellation of places */
+  .places{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px}
+  .places .chip{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:12px;letter-spacing:0.03em;color:var(--ink-dim);border:1px solid var(--line-soft);border-radius:2px;padding:8px 13px;background:var(--space-3)}
+  .places .chip.core{color:var(--star);border-color:var(--line)}
+
+  /* covenant */
+  .covenant .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:34px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .covenant .c{padding:30px 26px;border-right:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);background:var(--space)}
+  .covenant .c .n{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:12px;color:var(--dust)}
+  .covenant .c h3{margin:14px 0 10px;color:var(--star);font-size:1.1rem}
+  .covenant .c p{font-size:0.95rem;color:var(--ink-dim);margin:0}
+  @media(min-width:681px){
+    .covenant .c:nth-child(3n){border-right:0}
+    .covenant .c:nth-child(n+4){}
+    .covenant .c:nth-last-child(-n+3){border-bottom:0}
+  }
+  @media(max-width:680px){.covenant .grid{grid-template-columns:1fr}.covenant .c{border-right:0}}
+
+  /* standing / status */
+  .standing .panel{background:linear-gradient(180deg,var(--space-2),var(--space));border:1px solid var(--line);border-radius:10px;padding:34px 32px;margin-top:8px}
+  .standing .panel p{font-size:1.1rem;max-width:64ch;color:var(--ink)}
+  .standing .panel .key{color:var(--star)}
+
+  /* note */
+  .note .card{border-left:3px solid var(--star);background:var(--space-2);padding:28px 32px;border-radius:0 8px 8px 0;max-width:72ch}
+  .note .card .h{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--star);display:block;margin-bottom:12px}
+  .note .card p{margin:0;color:var(--ink-dim);font-size:1.02rem}
+  .note .card p .hl{color:var(--ink)}
+
+  /* band */
+  .band{padding:84px 0;text-align:center;position:relative;overflow:hidden}
+  .band .glow{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(79,178,192,0.1),transparent 60%);pointer-events:none}
+  .band .wrap{position:relative;z-index:2}
+  .band h2{max-width:22ch;margin:0 auto}
+  .band p{color:var(--ink-dim);max-width:52ch;margin:18px auto 30px}
+  .btn{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:13px;letter-spacing:0.04em;padding:13px 22px;border-radius:2px;border:1px solid var(--line);transition:all .2s;cursor:pointer;display:inline-block}
+  .btn-primary{background:var(--dust);border-color:var(--dust);color:#1a0d07;font-weight:500}
+  .btn-primary:hover{background:var(--dust-soft);border-color:var(--dust-soft)}
+  .btn-ghost{color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--aurora);color:var(--aurora-soft)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+
+  /* footer */
+  footer.site{border-top:1px solid var(--line-soft);padding:56px 0 40px;background:var(--space)}
+  .foot-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:32px}
+  .foot-brand{max-width:36ch}
+  .foot-brand .name{font-family:"Space Grotesk",ui-sans-serif,sans-serif;font-weight:600;font-size:1.1rem}
+  .foot-brand p{color:var(--ink-dim);font-size:0.92rem;margin-top:10px}
+  .foot-brand .tag{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:11px;color:var(--ink-dim);margin-top:14px;letter-spacing:0.03em}
+  .foot-brand .tag .sep{color:var(--dust)}
+  .foot-col h4{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--aurora-soft);margin:0 0 14px}
+  .foot-col ul{list-style:none;margin:0;padding:0}
+  .foot-col li{margin-bottom:9px}
+  .foot-col a{font-size:0.92rem;color:var(--ink-dim);transition:color .2s}
+  .foot-col a:hover{color:var(--ink)}
+  .acknowledge{margin-top:42px;padding-top:26px;border-top:1px solid var(--line-soft);color:var(--ink-dim);font-size:0.86rem;max-width:78ch;line-height:1.7}
+  .copyright{margin-top:18px;color:var(--ink-dim);font-size:0.8rem;opacity:0.8}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}*{animation:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="https://www.teraustralis.com.au/index.html">TerAustralis Incognita<span class="dot">.</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="navlinks">menu</button>
+    <nav class="nav-links" id="navlinks">
+      <a href="https://www.teraustralis.com.au/index.html">Home</a>
+      <a href="#main" class="current">Vision</a>
+      <a href="https://www.teraustralis.com.au/foundations.html">Foundations</a>
+      <a href="https://www.teraustralis.com.au/approach.html">Approach</a>
+      <a href="https://www.teraustralis.com.au/concepts.html">Concepts</a>
+      <a href="https://www.teraustralis.com.au/get-involved.html">Get Involved</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas class="stars" id="starfield" aria-hidden="true"></canvas>
+    <div class="glow-sky"></div>
+    <div class="glow-dust"></div>
+    <div class="wrap">
+      <span class="eyebrow">The Vision</span>
+      <h1>Songlines to Starlines.</h1>
+      <p class="lede">A sovereign Australian future that reaches from Country to the stars — the world's <span class="em">oldest living knowledge</span> carried forward with new technology, and built on consent, privacy, and care.</p>
+      <p class="tagline">Songlines to Starlines <span class="sep">&middot;</span> Red Dust to Rockets <span class="sep">&middot;</span> Dreamtime to Deep Space</p>
+    </div>
+  </section>
+
+  <!-- THE VISION -->
+  <section>
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">What we're dreaming</span></div>
+      <p class="lead-para reveal">TerAustralis Incognita imagines an independent Australia that meets the space age on its own terms — turning onshore critical minerals and rare earths into real capability, and letting the knowledge that has read this land and sky for tens of thousands of years guide how we step off it. <span class="em">A future where reaching outward deepens our roots, rather than severing them.</span></p>
+      <p class="lead-para reveal" style="margin-top:1.4rem">It's a long horizon, and we hold it plainly: this is a coordination and advocacy effort in its early days — a place to gather people, ideas and care around a sovereign future, not a launch operator and not a finished thing. The vision is large on purpose. The work underneath it is honest and one step at a time.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- THE NAMES WE CARRY -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">The names we carry</span>
+        <h2>A language for the journey.</h2>
+        <p class="sub">Every long endeavour grows its own words. These are ours — part map, part mythology, part promise.</p>
+      </div>
+      <div class="names reveal">
+        <div class="name">
+          <span class="tag">The project</span>
+          <h3>TerAustralis Incognita</h3>
+          <p>"The unknown southern land" — the old cartographers' name for a continent imagined before it was charted. We reclaim it for a future still being dreamed into being.</p>
+        </div>
+        <div class="name">
+          <span class="tag">The hub</span>
+          <h3>Marsbase Down Under</h3>
+          <p>A vision of a Mars-analogue centre in the red heart of the Pilbara — Australian ground that already looks like another world, as a place to learn, test, and imagine.</p>
+        </div>
+        <div class="name">
+          <span class="tag">The reasoning layer</span>
+          <h3>CrystalCore</h3>
+          <p>The project's technology spine — a real, consent-aware reasoning framework, currently in development. Described honestly on the <a href="https://www.teraustralis.com.au/index.html">builders page</a>; vision and engineering kept clearly apart.</p>
+        </div>
+        <div class="name">
+          <span class="tag">The emblem</span>
+          <h3>The Crystal Dragon &amp; the Longship</h3>
+          <p>A dragon of light arcing across the starlines, and a sovereign longship beneath it — old courage carried toward new sky. The symbols the vision travels under.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEVEN SISTERS -->
+  <section class="feature">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">A guiding story</span><h2>The Seven Sisters.</h2></div>
+      <p class="lead-para reveal">Among the oldest stories carried across this continent and written in the night sky is the songline of the Seven Sisters — an account of pursuit and protection, of women navigating by the stars, of strength held in company. We hold it as a guiding image of resilience, feminine strength, and collective care.</p>
+      <p class="lead-para reveal" style="margin-top:1.2rem;color:var(--ink-dim);font-size:1.02rem">This story belongs to its Traditional Custodians. We carry it with respect and only ever with consent — honouring it, never claiming it, and deferring always to the knowledge-holders to whom it belongs.</p>
+    </div>
+  </section>
+
+  <!-- VISUAL LANGUAGE -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">The visual language</span>
+        <h2>Read in dots and lines.</h2>
+        <p class="sub">Our concept art draws on the visual grammar of Aboriginal iconography — used with respect for its origins and meaning. A few of its marks:</p>
+      </div>
+      <div class="symbols reveal">
+        <div class="sym"><div class="glyph">&bull;</div><h3>Dots</h3><p>Stars overhead and tracks across the ground.</p></div>
+        <div class="sym"><div class="glyph">&#9678;</div><h3>Concentric circles</h3><p>Meeting places — a site, a waterhole, a gathering.</p></div>
+        <div class="sym"><div class="glyph">&#8213;</div><h3>Lines</h3><p>Journeys, paths, the routes between places.</p></div>
+        <div class="sym"><div class="glyph">&#8745;</div><h3>U-shapes</h3><p>People, seated together around the story.</p></div>
+      </div>
+      <p class="lead-para reveal" style="margin-top:28px;color:var(--ink-dim);font-size:1.0rem">Song and sound belong here too — the vision is carried in music as much as in words, and the creative work moves between image, story, and song.</p>
+    </div>
+  </section>
+
+  <!-- CONSTELLATION OF PLACES -->
+  <section>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">A constellation of connection</span>
+        <h2>Places the vision reaches toward.</h2>
+        <p class="sub">Not a network that exists yet — an invitation. The communities and collaborators, here and abroad, we hope to connect as this grows. A map of aspiration, not infrastructure.</p>
+      </div>
+      <div class="places reveal">
+        <span class="chip core">Uluru</span>
+        <span class="chip core">Pilbara</span>
+        <span class="chip">Sydney / Gadigal</span>
+        <span class="chip">Perth</span>
+        <span class="chip">Darwin</span>
+        <span class="chip">Canberra</span>
+        <span class="chip">Brisbane</span>
+        <span class="chip">Cairns</span>
+        <span class="chip">Adelaide</span>
+        <span class="chip">Hobart</span>
+        <span class="chip">Broome</span>
+        <span class="chip">Alice Springs</span>
+      </div>
+      <div class="places reveal" style="margin-top:14px;opacity:0.9">
+        <span class="chip">Aotearoa</span>
+        <span class="chip">Hawai'i</span>
+        <span class="chip">Tokyo</span>
+        <span class="chip">Singapore</span>
+        <span class="chip">London</span>
+        <span class="chip">New York</span>
+        <span class="chip">Cape Town</span>
+        <span class="chip">Rio</span>
+        <span class="chip">&hellip; and growing</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE COVENANT -->
+  <section class="covenant alt">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">The covenant</span>
+        <h2>How we hold all of it.</h2>
+        <p class="sub">The vision can be vast because the commitments under it are firm. These aren't features; they're the ground rules.</p>
+      </div>
+      <div class="grid reveal">
+        <div class="c"><span class="n">01</span><h3>Radical consent</h3><p>Free, prior and informed consent (FPIC) at the centre. Nothing taken; everything offered and agreed.</p></div>
+        <div class="c"><span class="n">02</span><h3>Indigenous leadership</h3><p>First Nations knowledge, guidance and benefit are foundational — not decoration, and not an afterthought.</p></div>
+        <div class="c"><span class="n">03</span><h3>Privacy &amp; sovereignty</h3><p>Data and decisions stay sovereign — close to the people and Country they belong to.</p></div>
+        <div class="c"><span class="n">04</span><h3>Mental autonomy</h3><p>The mind is inviolable. No technology of ours reaches into a person's inner life without their full, ongoing consent.</p></div>
+        <div class="c"><span class="n">05</span><h3>Cultural care</h3><p>Sacred knowledge is handled with the respect it's owed, on the terms of those it belongs to.</p></div>
+        <div class="c"><span class="n">06</span><h3>Honest scope</h3><p>We say plainly what's real, what's in the making, and what's still a dream. No overclaiming.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHERE THE WORK STANDS -->
+  <section class="standing">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="eyebrow">Where the work stands</span></div>
+      <div class="panel reveal">
+        <p>Today, this is an early initiative finding its feet: <span class="key">a working reasoning framework in development, a growing body of concept art and writing, and a vision taking shape in the open.</span> The dream is multiplanetary; the footing is honest and present. Those are the foundations — real, finished things — and we let the vision grow from them rather than ahead of them.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTE -->
+  <section class="note">
+    <div class="wrap">
+      <div class="card reveal">
+        <span class="h">A note on this page</span>
+        <p>This is a <span class="hl">vision</span> — and it's written in the language a vision deserves: mythic, hopeful, reaching. The poetic register here expresses <span class="hl">direction and meaning, not finished capability.</span> The concrete technology behind the project is described separately and plainly. Both are true; we keep the line between them clear on purpose.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAND -->
+  <section class="band">
+    <div class="glow"></div>
+    <div class="wrap">
+      <span class="eyebrow">Dream it with us</span>
+      <h2>A new Australia, dreamed into reality.</h2>
+      <p>If this vision speaks to you — in code, culture, policy, art, or simply belief — there's a place for you in it.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://www.teraustralis.com.au/get-involved.html">Get Involved</a>
+        <a class="btn btn-ghost" href="https://www.teraustralis.com.au/concepts.html">See the Concept Art</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="name">TerAustralis Incognita</div>
+        <p>A coordination and advocacy initiative for a sovereign Australian future — from Country to the stars.</p>
+        <div class="tag">Songlines to Starlines <span class="sep">&middot;</span> Red Dust to Rockets <span class="sep">&middot;</span> Dreamtime to Deep Space</div>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="https://www.teraustralis.com.au/index.html">Home</a></li>
+          <li><a href="https://www.teraustralis.com.au/foundations.html">Foundations</a></li>
+          <li><a href="https://www.teraustralis.com.au/concepts.html">Concepts</a></li>
+          <li><a href="https://www.teraustralis.com.au/get-involved.html">Get Involved</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="https://secondfounding.com.au">Second Founding</a></li>
+          <li><a href="https://www.teraustralis.com.au/support.html">Support the mission</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="acknowledge">TerAustralis Incognita acknowledges the Traditional Owners of Country throughout Australia and their continuing connection to land, waters, sky and community. We pay our respects to Elders past and present. The cultural knowledge, stories and symbols referenced here belong to their custodians and are held with respect, and only with consent. A sovereign future is built on honesty and consent.</p>
+    <p class="copyright">&copy; 2026 TerAustralis Incognita&trade;. Written content licensed under CC BY-NC-ND 4.0; site code and all other rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  (function(){var btn=document.querySelector('.nav-toggle');var links=document.getElementById('navlinks');if(btn&&links){btn.addEventListener('click',function(){var open=links.classList.toggle('open');btn.setAttribute('aria-expanded',open?'true':'false');});}})();
+  (function(){var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;var els=document.querySelectorAll('.reveal');if(reduce||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:0.14});els.forEach(function(e){io.observe(e)});})();
+  (function(){
+    var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var c=document.getElementById('starfield'); if(!c)return;
+    var ctx=c.getContext('2d'),stars=[],raf=null;
+    function size(){var p=c.parentElement;c.width=p.offsetWidth;c.height=p.offsetHeight;
+      var n=Math.min(130,Math.floor(c.width*c.height/9000));stars=[];
+      for(var i=0;i<n;i++){stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.3+0.2,a:Math.random()*0.6+0.2,tw:Math.random()*0.02+0.004,dir:Math.random()<0.5?1:-1});}}
+    function draw(){ctx.clearRect(0,0,c.width,c.height);
+      for(var i=0;i<stars.length;i++){var s=stars[i];if(!reduce){s.a+=s.tw*s.dir;if(s.a>0.85){s.a=0.85;s.dir=-1;}if(s.a<0.15){s.a=0.15;s.dir=1;}}
+        ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,6.283);ctx.fillStyle='rgba(235,220,184,'+s.a+')';ctx.fill();}
+      if(!reduce)raf=requestAnimationFrame(draw);}
+    size();draw();
+    window.addEventListener('resize',function(){if(raf)cancelAnimationFrame(raf);size();draw();});
+  })();
+</script>
+</body>
+</html>

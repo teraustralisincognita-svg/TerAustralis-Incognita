@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Builders · CrystalCore — TerAustralis Incognita</title>
+<meta name="description" content="CrystalCore is the sovereign, local-first reasoning layer beneath TerAustralis — knowledge that travels like a songline, carrying its provenance, consent and coherence. A foundation layer, honestly scoped.">
+<meta property="og:title" content="Builders · CrystalCore — TerAustralis Incognita">
+<meta property="og:description" content="Knowledge that travels like a songline — carrying where it came from, who may hold it, and how far it can be trusted. The reasoning substrate beneath TerAustralis.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- SITE FONTS: replace this whole <link> with the live site's font import so faces match. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* =====================================================================
+     SITE TOKENS  —  REPLACE THESE WITH THE LIVE SITE'S REAL VALUES.
+     These hexes were approximated from the concept art and DO NOT yet
+     match teraustralis.com.au. Copy the real color variables (and fonts
+     above) from the existing site CSS so this page matches exactly.
+     Every color on the page is derived from the variables below — change
+     them here and the whole page updates.
+     ===================================================================== */
+  :root{
+    --space:#08070F;
+    --space-2:#100E1B;
+    --space-3:#181527;
+    --dust:#F8A23B;
+    --dust-soft:#FCC265;
+    --aurora:#8B5CF6;
+    --aurora-soft:#A78BFA;
+    --star:#EC4899;
+    --ink:#ECEDF4;
+    --ink-dim:#C7CBD4;
+    --line:rgba(255,255,255,0.12);
+    --line-soft:rgba(255,255,255,0.06);
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--space);
+    color:var(--ink);
+    font-family:"Inter",ui-sans-serif,system-ui,sans-serif;
+    font-size:18px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  .eyebrow{
+    font-family:"Inter",ui-sans-serif,system-ui,sans-serif;
+    font-size:12px;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--aurora-soft);
+    display:inline-block;
+  }
+  h1,h2,h3{font-family:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;font-weight:600;line-height:1.08;margin:0}
+  h1{font-size:clamp(2.6rem,6.4vw,4.6rem);letter-spacing:-0.015em}
+  h2{font-size:clamp(1.9rem,3.6vw,2.8rem);letter-spacing:-0.01em}
+  h3{font-size:1.22rem;letter-spacing:-0.005em}
+  p{margin:0 0 1.1rem}
+
+  /* ---- Skip link ---- */
+  .skip{position:absolute;left:-999px;top:0;background:var(--star);color:var(--space);padding:10px 16px;border-radius:6px;z-index:200}
+  .skip:focus{left:16px;top:16px}
+
+  /* ---- Nav ---- */
+  header.site{
+    position:sticky;top:0;z-index:100;
+    backdrop-filter:blur(10px);
+    background:rgba(10,13,19,0.72);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:"Space Grotesk",ui-sans-serif,sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:-0.01em}
+  .brand .dot{color:var(--dust)}
+  .nav-links{display:flex;gap:22px;align-items:center}
+  .nav-links a{font-size:14px;color:var(--ink-dim);transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a.current{color:var(--star)}
+  .nav-toggle{display:none;background:none;border:0;color:var(--ink);font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:13px;cursor:pointer}
+  @media(max-width:860px){
+    .nav-links{display:none}
+    .nav-links.open{
+      display:flex;position:absolute;top:64px;left:0;right:0;
+      flex-direction:column;gap:0;background:var(--space-2);
+      border-bottom:1px solid var(--line);padding:8px 0;
+    }
+    .nav-links.open a{padding:12px 28px}
+    .nav-toggle{display:block}
+  }
+
+  /* ---- Hero ---- */
+  .hero{position:relative;padding:118px 0 96px;overflow:hidden}
+  .hero .stars{position:absolute;inset:0;z-index:0;pointer-events:none}
+  .hero .glow-sky{position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:120%;height:60%;
+    background:radial-gradient(ellipse at center,rgba(84,184,148,0.16),transparent 62%);filter:blur(8px);z-index:0;pointer-events:none}
+  .hero .glow-dust{position:absolute;bottom:-40%;left:50%;transform:translateX(-50%);width:130%;height:70%;
+    background:radial-gradient(ellipse at center,rgba(196,90,52,0.18),transparent 60%);filter:blur(8px);z-index:0;pointer-events:none}
+  .hero .wrap{position:relative;z-index:2}
+  .hero h1{margin:18px 0 0;max-width:14ch}
+  .hero .lede{font-size:clamp(1.05rem,1.9vw,1.32rem);color:var(--ink);max-width:54ch;margin-top:24px}
+  .hero .lede .em{color:var(--star)}
+  .tagline{
+    font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:13px;letter-spacing:0.04em;
+    color:var(--ink-dim);margin-top:30px;
+  }
+  .tagline .sep{color:var(--dust)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+  .btn{
+    font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:13px;letter-spacing:0.04em;
+    padding:13px 22px;border-radius:2px;border:1px solid var(--line);
+    transition:all .2s;cursor:pointer;display:inline-block;
+  }
+  .btn-primary{background:var(--dust);border-color:var(--dust);color:#1a0d07;font-weight:500}
+  .btn-primary:hover{background:var(--dust-soft);border-color:var(--dust-soft)}
+  .btn-ghost{color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--aurora);color:var(--aurora-soft)}
+
+  /* ---- Section scaffold ---- */
+  section{position:relative;padding:80px 0}
+  .section-head{max-width:60ch}
+  .section-head h2{margin-top:14px}
+  .section-head .sub{color:var(--ink-dim);margin-top:16px;font-size:1.05rem}
+
+  .divider{height:1px;background:var(--line-soft);max-width:var(--maxw);margin:0 auto}
+
+  /* ---- Honesty strip ---- */
+  .scope .panel{
+    background:linear-gradient(180deg,var(--space-2),var(--space));
+    border:1px solid var(--line);border-radius:10px;padding:38px 36px;margin-top:8px;
+  }
+  .scope .panel p{font-size:1.16rem;max-width:62ch;color:var(--ink)}
+  .scope .panel .key{color:var(--star)}
+  .scope .panel .not{color:var(--dust-soft)}
+  .triad{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+  .triad .cell{padding:22px;border:1px solid var(--line-soft);border-radius:8px;background:var(--space-3)}
+  .triad .tag{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--aurora-soft)}
+  .triad h3{margin:12px 0 8px;font-size:1.08rem}
+  .triad p{font-size:0.96rem;color:var(--ink-dim);margin:0}
+  @media(max-width:760px){.triad{grid-template-columns:1fr}}
+
+  /* ---- What travels the line ---- */
+  .travels{background:var(--space-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+  .props{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:38px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .props .prop{padding:34px 30px;border-right:1px solid var(--line-soft);background:var(--space)}
+  .props .prop:last-child{border-right:0}
+  .props .num{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:12px;color:var(--dust);letter-spacing:0.1em}
+  .props h3{margin:16px 0 12px}
+  .props p{font-size:0.99rem;color:var(--ink-dim);margin:0}
+  .props .prop:nth-child(1) h3{color:var(--star)}
+  .props .prop:nth-child(2) h3{color:var(--star)}
+  .props .prop:nth-child(3) h3{color:var(--star)}
+  @media(max-width:760px){
+    .props{grid-template-columns:1fr}
+    .props .prop{border-right:0;border-bottom:1px solid var(--line-soft)}
+    .props .prop:last-child{border-bottom:0}
+  }
+
+  /* ---- The songline / layers ---- */
+  .layers{position:relative}
+  .songline{position:relative;margin-top:48px;padding-left:54px}
+  /* the luminous spine: dust at the bottom, aurora at the top */
+  .songline::before{
+    content:"";position:absolute;left:19px;top:6px;bottom:6px;width:2px;
+    background:linear-gradient(180deg,var(--aurora) 0%,var(--star) 48%,var(--dust) 100%);
+    box-shadow:0 0 14px rgba(130,210,178,0.35);
+  }
+  .songline .travel{
+    position:absolute;left:14px;width:12px;height:12px;border-radius:50%;
+    background:var(--star);box-shadow:0 0 12px var(--star);
+    animation:rise 7s linear infinite;opacity:0;
+  }
+  @keyframes rise{
+    0%{top:100%;opacity:0}
+    8%{opacity:1}
+    92%{opacity:1}
+    100%{top:0%;opacity:0}
+  }
+  .layer{position:relative;padding:26px 0 30px}
+  .layer::before{
+    content:"";position:absolute;left:-42px;top:32px;width:14px;height:14px;border-radius:50%;
+    background:var(--space);border:2px solid var(--star);box-shadow:0 0 10px rgba(235,220,184,0.5);
+  }
+  .layer .station{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--dust-soft)}
+  .layer h3{margin:10px 0 10px;font-size:1.5rem}
+  .layer h3 .name{color:var(--star)}
+  .layer p{color:var(--ink-dim);max-width:60ch;font-size:1.02rem;margin:0}
+  .layer .role{color:var(--aurora-soft);font-style:italic}
+  @media(max-width:620px){
+    .songline{padding-left:42px}
+    .songline::before{left:13px}
+    .layer::before{left:-36px}
+    .songline .travel{left:8px}
+  }
+
+  /* ---- Mirror ---- */
+  .mirror{background:var(--space-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+  .mirror .inner{max-width:64ch}
+  .mirror h2{margin-top:14px}
+  .mirror p{font-size:1.16rem;color:var(--ink);margin-top:18px}
+  .mirror .pull{color:var(--star)}
+
+  /* ---- Status ---- */
+  .status .cols{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:34px}
+  .status .col{border:1px solid var(--line);border-radius:10px;padding:30px 28px;background:var(--space-3)}
+  .status .col.built{border-top:3px solid var(--aurora)}
+  .status .col.next{border-top:3px solid var(--dust)}
+  .status .col .label{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase}
+  .status .built .label{color:var(--aurora-soft)}
+  .status .next .label{color:var(--dust-soft)}
+  .status .col h3{margin:14px 0 18px}
+  .status ul{list-style:none;margin:0;padding:0}
+  .status li{position:relative;padding:9px 0 9px 26px;border-bottom:1px solid var(--line-soft);font-size:0.99rem;color:var(--ink)}
+  .status li:last-child{border-bottom:0}
+  .status li::before{content:"";position:absolute;left:2px;top:16px;width:7px;height:7px;border-radius:50%}
+  .status .built li::before{background:var(--aurora)}
+  .status .next li::before{background:var(--dust)}
+  @media(max-width:760px){.status .cols{grid-template-columns:1fr}}
+
+  /* ---- Honesty note ---- */
+  .note{padding:64px 0}
+  .note .card{
+    border-left:3px solid var(--star);background:var(--space-2);
+    padding:30px 32px;border-radius:0 8px 8px 0;max-width:70ch;
+  }
+  .note .card .h{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--star);display:block;margin-bottom:14px}
+  .note .card p{margin:0;color:var(--ink-dim);font-size:1.04rem}
+  .note .card p .hl{color:var(--ink)}
+
+  /* ---- CTA band ---- */
+  .band{padding:84px 0;text-align:center;position:relative;overflow:hidden}
+  .band .glow{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(84,184,148,0.1),transparent 60%);pointer-events:none}
+  .band .wrap{position:relative;z-index:2}
+  .band h2{max-width:20ch;margin:0 auto}
+  .band p{color:var(--ink-dim);max-width:52ch;margin:18px auto 30px}
+
+  /* ---- Footer ---- */
+  footer.site{border-top:1px solid var(--line-soft);padding:56px 0 40px;background:var(--space)}
+  .foot-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:32px}
+  .foot-brand{max-width:36ch}
+  .foot-brand .name{font-family:"Space Grotesk",ui-sans-serif,sans-serif;font-weight:600;font-size:1.1rem}
+  .foot-brand p{color:var(--ink-dim);font-size:0.92rem;margin-top:10px}
+  .foot-brand .tag{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:11px;color:var(--ink-dim);margin-top:14px;letter-spacing:0.03em}
+  .foot-brand .tag .sep{color:var(--dust)}
+  .foot-col h4{font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--aurora-soft);margin:0 0 14px}
+  .foot-col ul{list-style:none;margin:0;padding:0}
+  .foot-col li{margin-bottom:9px}
+  .foot-col a{font-size:0.92rem;color:var(--ink-dim);transition:color .2s}
+  .foot-col a:hover{color:var(--ink)}
+  .acknowledge{margin-top:42px;padding-top:26px;border-top:1px solid var(--line-soft);color:var(--ink-dim);font-size:0.86rem;max-width:78ch;line-height:1.7}
+  .copyright{margin-top:18px;color:var(--ink-dim);font-size:0.8rem;opacity:0.8}
+
+  /* ---- Reveal ---- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    .songline .travel{display:none}
+    *{animation:none!important}
+  }
+
+  /* ---- Hero image override (Songlines to Starlines) ---- */
+  .hero{min-height:86vh;display:flex;align-items:center;padding:124px 0 96px}
+  .hero .bg{position:absolute;inset:0;z-index:0;
+    background-image:url("images/songlines-starlines-crystal.jpg");
+    background-size:cover;background-position:center}
+  .hero .scrim{position:absolute;inset:0;z-index:1;background:
+    linear-gradient(180deg,rgba(8,11,17,0.74) 0%,rgba(8,11,17,0.20) 42%,rgba(8,11,17,0.66) 100%),
+    linear-gradient(90deg,rgba(8,11,17,0.84) 0%,rgba(8,11,17,0.32) 58%,rgba(8,11,17,0) 100%)}
+  .hero h1{text-shadow:0 2px 34px rgba(0,0,0,0.55)}
+  .hero .lede{text-shadow:0 1px 18px rgba(0,0,0,0.6)}
+  .hero .tagline{text-shadow:0 1px 12px rgba(0,0,0,0.7)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="https://www.teraustralis.com.au/index.html">TerAustralis Incognita<span class="dot">.</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="navlinks">menu</button>
+    <nav class="nav-links" id="navlinks">
+      <a href="https://www.teraustralis.com.au/index.html">Home</a>
+      <a href="https://www.teraustralis.com.au/vision.html">Vision</a>
+      <a href="https://www.teraustralis.com.au/foundations.html">Foundations</a>
+      <a href="https://www.teraustralis.com.au/approach.html">Approach</a>
+      <a href="https://www.teraustralis.com.au/concepts.html">Concepts</a>
+      <a href="#main" class="current">Builders</a>
+      <a href="https://www.teraustralis.com.au/get-involved.html">Get Involved</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="bg" aria-hidden="true"></div>
+    <div class="scrim" aria-hidden="true"></div>
+    <div class="wrap">
+      <span class="eyebrow">Builders · CrystalCore</span>
+      <h1>Knowledge that travels like a songline.</h1>
+      <p class="lede">CrystalCore is the reasoning layer beneath TerAustralis — a sovereign, local-first substrate where every conclusion carries <span class="em">where it came from, who may hold it, and how far it can be trusted.</span></p>
+      <p class="tagline">provenance <span class="sep">&middot;</span> consent <span class="sep">&middot;</span> coherence <span class="sep">&middot;</span> red dust to starline</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#songline">How it works</a>
+        <a class="btn btn-ghost" href="https://www.teraustralis.com.au/vision.html">See the vision</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IT IS -->
+  <section class="scope">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">What it is</span>
+      </div>
+      <div class="panel reveal">
+        <p>CrystalCore is a <span class="key">foundation layer — a sovereign reasoning substrate.</span> It is <span class="not">not a finished AGI,</span> and it is <span class="not">not a web-security product.</span> It is the auditable groundwork a larger system can one day stand on — built right from the start, so it holds.</p>
+        <div class="triad">
+          <div class="cell">
+            <span class="tag">Local-first</span>
+            <h3>It stays with you</h3>
+            <p>Runs offline on modest hardware — an old laptop, a small server, a Raspberry Pi — with zero required dependencies. Your data stays close to Country.</p>
+          </div>
+          <div class="cell">
+            <span class="tag">Auditable</span>
+            <h3>It shows its working</h3>
+            <p>No black box. Every conclusion can be traced back through the exact steps and sources that produced it.</p>
+          </div>
+          <div class="cell">
+            <span class="tag">Consent-first</span>
+            <h3>It asks before it acts</h3>
+            <p>Reasoning fails closed: hand it something a reader isn't permitted to see, and the chain stops rather than leaking.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WHAT TRAVELS THE LINE -->
+  <section class="travels">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">What travels the line</span>
+        <h2>Three things ride every songline.</h2>
+        <p class="sub">A songline carries more than a route — it carries who the knowledge belongs to and how it must be passed on. CrystalCore carries the same three things through every step of reasoning.</p>
+      </div>
+      <div class="props reveal">
+        <div class="prop">
+          <span class="num">01</span>
+          <h3>Provenance</h3>
+          <p>Every derived fact links back to the inputs and the rule that made it. Nothing arrives without a trail you can follow home.</p>
+        </div>
+        <div class="prop">
+          <span class="num">02</span>
+          <h3>Consent</h3>
+          <p>A reader sees only what its permissions allow. Reasoning fails closed on a forbidden input — it stops rather than guessing past the boundary.</p>
+        </div>
+        <div class="prop">
+          <span class="num">03</span>
+          <h3>Coherence</h3>
+          <p>Confidence travels as the weakest input times the rule's strength, and fades with time. The system never sounds more certain than its ground.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE SONGLINE / LAYERS -->
+  <section class="layers" id="songline">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">The four layers</span>
+        <h2>From the ground to the singers.</h2>
+        <p class="sub">Four layers form one path. Trust and data flow up from the substrate; conclusions flow back down, each carrying its trail. Read it from the red dust upward.</p>
+      </div>
+
+      <div class="songline reveal">
+        <span class="travel" style="animation-delay:0s"></span>
+        <span class="travel" style="animation-delay:2.3s"></span>
+        <span class="travel" style="animation-delay:4.6s"></span>
+
+        <div class="layer">
+          <span class="station">Layer 04 · the singers</span>
+          <h3><span class="name">CrystalMind</span></h3>
+          <p>Four named stances — <span class="role">TruthSeeker, Guardian, Visionary, Creator</span> — that act only when they're called. None of them runs on its own or wakes another. The Guardian inspects a conclusion's real coherence and provenance and removes what doesn't stand, no matter how confident the voice that proposed it.</p>
+        </div>
+
+        <div class="layer">
+          <span class="station">Layer 03 · the tending</span>
+          <h3><span class="name">CrystalEvolve</span></h3>
+          <p>Population-based training of hybrid genomes — numbers and symbolic rules together — grown from a fixed seed, so a run reproduces exactly. Symbolic validity is a hard pass/fail gate, and high family-priority survivors are protected when memory runs tight.</p>
+        </div>
+
+        <div class="layer">
+          <span class="station">Layer 02 · the path</span>
+          <h3><span class="name">CrystalFlow</span></h3>
+          <p>Symbolic reasoning you can read one step at a time, with a small autograd engine underneath. Chains stop at the first denial, and confidence and provenance are carried the whole way — so the route and its certainty are always legible.</p>
+        </div>
+
+        <div class="layer">
+          <span class="station">Layer 01 · the ground</span>
+          <h3><span class="name">CrystalMemory</span></h3>
+          <p>A sparse, consent-aware store. Every node holds provenance, coherence, consent flags and family priority alongside its data. Persistence is atomic and checksum-protected — safe on a microSD card — and the store prunes itself to stay within a hard memory limit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MIRROR -->
+  <section class="mirror">
+    <div class="wrap">
+      <div class="inner reveal">
+        <span class="eyebrow">Why it's built this way</span>
+        <h2>A mirror, not an oracle.</h2>
+        <p>CrystalCore doesn't hand down answers from somewhere you can't see. It <span class="pull">reflects your own reasoning back to you</span> — step by step, source by source — and when a conclusion stands on thin ground, the Guardian says so plainly.</p>
+        <p>The point was never to build something to be obeyed. It was to build something you can see straight through: an intelligence that lives close to you, remembers where its knowledge came from, and stays honest about how far it can be trusted.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATUS -->
+  <section class="status">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Where it stands</span>
+        <h2>Built today, and on the way.</h2>
+        <p class="sub">An honest map — what works now, and what's still ahead. Like everything here, a foundation laid in the open.</p>
+      </div>
+      <div class="cols reveal">
+        <div class="col built">
+          <span class="label">Built today</span>
+          <h3>Working and tested</h3>
+          <ul>
+            <li>All four layers, integrated into one reason → remember → improve loop</li>
+            <li>118 passing tests, including seven cross-cutting invariants</li>
+            <li>Zero required dependencies — runs on bare Python 3</li>
+            <li>Two end-to-end demos: a family decision, and a policy council</li>
+          </ul>
+        </div>
+        <div class="col next">
+          <span class="label">On the way</span>
+          <h3>Next to be laid</h3>
+          <ul>
+            <li>CrystalAudit — full decision logging and exportable reports</li>
+            <li>A simple CLI and web view for everyday use</li>
+            <li>Raspberry Pi packaging for true edge deployment</li>
+            <li>The Wisdom Layer — a neutral, consent-flagged knowledge layer (design stage)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HONESTY NOTE -->
+  <section class="note">
+    <div class="wrap">
+      <div class="card reveal">
+        <span class="h">A note on honesty</span>
+        <p>The mystical language of <span class="hl">Songlines to Starlines</span> belongs to the art — the concept work, the music, the stories. CrystalCore itself is plain engineering: <span class="hl">the claims on this page describe what the code actually does today.</span> The vision is the direction we're singing toward; the code is the ground we're standing on. Both are real. Neither is pretending to be the other.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="band">
+    <div class="glow"></div>
+    <div class="wrap">
+      <span class="eyebrow">Build the foundation</span>
+      <h2>An independent future starts with a network.</h2>
+      <p>Whether you work in code, reasoning systems, policy or community — if a sovereign, auditable foundation speaks to you, there's a place for you in this.</p>
+      <div class="cta-row" style="justify-content:center">
+        <a class="btn btn-primary" href="https://www.teraustralis.com.au/get-involved.html">Get Involved</a>
+        <a class="btn btn-ghost" href="https://www.teraustralis.com.au/foundations.html">Read the Foundations</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="name">TerAustralis Incognita</div>
+        <p>A coordination and advocacy initiative for sovereign Australian space capability — built by Aussies, for Aussies.</p>
+        <div class="tag">Songlines to Starlines <span class="sep">·</span> Red Dust to Rockets <span class="sep">·</span> Dreamtime to Deep Space</div>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="https://www.teraustralis.com.au/index.html">Home</a></li>
+          <li><a href="https://www.teraustralis.com.au/vision.html">Vision</a></li>
+          <li><a href="https://www.teraustralis.com.au/foundations.html">Foundations</a></li>
+          <li><a href="https://www.teraustralis.com.au/concepts.html">Concepts</a></li>
+          <li><a href="https://www.teraustralis.com.au/get-involved.html">Get Involved</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="https://secondfounding.com.au">Second Founding</a></li>
+          <li><a href="https://www.teraustralis.com.au/support.html">Support the mission</a></li>
+          <li><a href="https://www.teraustralis.com.au/get-involved.html">Expression of interest</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="acknowledge">TerAustralis Incognita acknowledges the Traditional Owners of Country throughout Australia and their continuing connection to land, waters, sky and community. We pay our respects to Elders past and present, and recognise that a sovereign future is built on honesty and consent.</p>
+    <p class="copyright">© 2026 TerAustralis Incognita™. CrystalCore is released under the MIT License. Written content licensed under CC BY-NC-ND 4.0; site code and all other rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav
+  (function(){
+    var btn=document.querySelector('.nav-toggle');
+    var links=document.getElementById('navlinks');
+    if(btn&&links){
+      btn.addEventListener('click',function(){
+        var open=links.classList.toggle('open');
+        btn.setAttribute('aria-expanded',open?'true':'false');
+      });
+    }
+  })();
+
+  // Scroll reveal
+  (function(){
+    var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var els=document.querySelectorAll('.reveal');
+    if(reduce||!('IntersectionObserver' in window)){
+      els.forEach(function(e){e.classList.add('in')});
+      return;
+    }
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}
+      });
+    },{threshold:0.14});
+    els.forEach(function(e){io.observe(e)});
+  })();
+
+  // Lightweight starfield (canvas, static + faint twinkle)
+  (function(){
+    var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var c=document.getElementById('starfield');
+    if(!c)return;
+    var ctx=c.getContext('2d');
+    var stars=[],raf=null;
+    function size(){
+      var p=c.parentElement;
+      c.width=p.offsetWidth;c.height=p.offsetHeight;
+      var n=Math.min(120,Math.floor(c.width*c.height/9000));
+      stars=[];
+      for(var i=0;i<n;i++){
+        stars.push({
+          x:Math.random()*c.width,
+          y:Math.random()*c.height,
+          r:Math.random()*1.3+0.2,
+          a:Math.random()*0.6+0.2,
+          tw:Math.random()*0.02+0.004,
+          dir:Math.random()<0.5?1:-1
+        });
+      }
+    }
+    function draw(){
+      ctx.clearRect(0,0,c.width,c.height);
+      for(var i=0;i<stars.length;i++){
+        var s=stars[i];
+        if(!reduce){
+          s.a+=s.tw*s.dir;
+          if(s.a>0.85){s.a=0.85;s.dir=-1;}
+          if(s.a<0.15){s.a=0.15;s.dir=1;}
+        }
+        ctx.beginPath();
+        ctx.arc(s.x,s.y,s.r,0,6.283);
+        ctx.fillStyle='rgba(235,220,184,'+s.a+')';
+        ctx.fill();
+      }
+      if(!reduce)raf=requestAnimationFrame(draw);
+    }
+    size();draw();
+    window.addEventListener('resize',function(){
+      if(raf)cancelAnimationFrame(raf);
+      size();draw();
+    });
+  })();
+</script>
+</body>
+</html>

@@ -125,11 +125,21 @@
       <div class="hidden items-center gap-7 text-sm md:flex">
         <a href="index.html" class="focus-ring text-muted transition-colors hover:text-ink">Home</a>
         <a href="vision.html" class="focus-ring text-muted transition-colors hover:text-ink">Vision</a>
-        <a href="foundations.html" class="focus-ring text-muted transition-colors hover:text-ink">Foundations</a>
-        <a href="approach.html" class="focus-ring text-muted transition-colors hover:text-ink">Approach</a>
-        <a href="momentum.html" class="focus-ring text-violet">Momentum</a>
-        <a href="support.html" class="focus-ring text-muted transition-colors hover:text-ink">Support</a>
-        <a href="concepts.html" class="focus-ring text-muted transition-colors hover:text-ink">Concepts</a>
+        <div class="relative">
+          <button type="button" id="moreToggle" class="focus-ring inline-flex items-center gap-1 text-violet" aria-haspopup="true" aria-expanded="false" aria-controls="moreMenu">
+            More
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div id="moreMenu" class="hidden absolute right-0 top-full z-50 mt-2 w-56 rounded-xl border border-white/10 bg-space-800 p-2 shadow-xl shadow-black/40" role="menu">
+            <a href="foundations.html" role="menuitem" class="block rounded-lg px-3 py-2 text-sm text-muted transition-colors hover:bg-white/5 hover:text-ink">Foundations</a>
+            <a href="approach.html" role="menuitem" class="block rounded-lg px-3 py-2 text-sm text-muted transition-colors hover:bg-white/5 hover:text-ink">Approach</a>
+            <a href="momentum.html" role="menuitem" class="block rounded-lg px-3 py-2 text-sm text-violet" aria-current="page">Momentum</a>
+            <a href="vision-songlines-to-starlines.html" role="menuitem" class="block rounded-lg px-3 py-2 text-sm text-muted transition-colors hover:bg-white/5 hover:text-ink">Songlines to Starlines</a>
+            <a href="support.html" role="menuitem" class="block rounded-lg px-3 py-2 text-sm text-muted transition-colors hover:bg-white/5 hover:text-ink">Support</a>
+            <a href="concepts.html" role="menuitem" class="block rounded-lg px-3 py-2 text-sm text-muted transition-colors hover:bg-white/5 hover:text-ink">Concepts</a>
+            <a href="builders.html" role="menuitem" class="block rounded-lg px-3 py-2 text-sm text-muted transition-colors hover:bg-white/5 hover:text-ink">Builders</a>
+          </div>
+        </div>
         <a href="get-involved.html" class="focus-ring ml-1 inline-flex items-center rounded-full bg-violet px-4 py-2 font-semibold text-space transition hover:bg-violet-light">Get Involved</a>
       </div>
       <button id="navToggle" class="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-lg text-ink md:hidden" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
@@ -142,9 +152,11 @@
         <a href="vision.html" class="rounded-lg px-3 py-2 text-muted hover:bg-white/5 hover:text-ink">Vision</a>
         <a href="foundations.html" class="rounded-lg px-3 py-2 text-muted hover:bg-white/5 hover:text-ink">Foundations</a>
         <a href="approach.html" class="rounded-lg px-3 py-2 text-muted hover:bg-white/5 hover:text-ink">Approach</a>
-        <a href="momentum.html" class="rounded-lg px-3 py-2 text-violet">Momentum</a>
+        <a href="momentum.html" class="rounded-lg px-3 py-2 text-violet" aria-current="page">Momentum</a>
+        <a href="vision-songlines-to-starlines.html" class="rounded-lg px-3 py-2 text-muted hover:bg-white/5 hover:text-ink">Songlines to Starlines</a>
         <a href="support.html" class="rounded-lg px-3 py-2 text-muted hover:bg-white/5 hover:text-ink">Support</a>
         <a href="concepts.html" class="rounded-lg px-3 py-2 text-muted hover:bg-white/5 hover:text-ink">Concepts</a>
+        <a href="builders.html" class="rounded-lg px-3 py-2 text-muted hover:bg-white/5 hover:text-ink">Builders</a>
         <a href="get-involved.html" class="mt-1 rounded-lg bg-violet px-3 py-2 font-semibold text-space">Get Involved</a>
       </div>
     </div>
@@ -327,10 +339,12 @@
           <ul class="mt-4 space-y-2 text-sm">
             <li><a href="index.html" class="focus-ring text-muted transition-colors hover:text-violet">Home</a></li>
             <li><a href="vision.html" class="focus-ring text-muted transition-colors hover:text-violet">Vision</a></li>
+            <li><a href="vision-songlines-to-starlines.html" class="focus-ring text-muted transition-colors hover:text-violet">Songlines to Starlines</a></li>
             <li><a href="foundations.html" class="focus-ring text-muted transition-colors hover:text-violet">Foundations</a></li>
             <li><a href="approach.html" class="focus-ring text-muted transition-colors hover:text-violet">Approach</a></li>
             <li><a href="momentum.html" class="focus-ring text-muted transition-colors hover:text-violet">Momentum</a></li>
             <li><a href="concepts.html" class="focus-ring text-muted transition-colors hover:text-violet">Concepts</a></li>
+            <li><a href="builders.html" class="focus-ring text-muted transition-colors hover:text-violet">Builders</a></li>
             <li><a href="get-involved.html" class="focus-ring text-muted transition-colors hover:text-violet">Get Involved</a></li>
           </ul>
         </div>
@@ -355,6 +369,23 @@
       var t = document.getElementById('navToggle'); var m = document.getElementById('mobileMenu');
       if (t && m) { t.addEventListener('click', function () { var hidden = m.classList.toggle('hidden'); t.setAttribute('aria-expanded', String(!hidden)); }); }
       var y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+      // "More" nav dropdown
+      var mt = document.getElementById('moreToggle'); var mm = document.getElementById('moreMenu');
+      if (mt && mm) {
+        mt.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var hidden = mm.classList.toggle('hidden');
+          mt.setAttribute('aria-expanded', String(!hidden));
+        });
+        document.addEventListener('click', function (e) {
+          if (!mm.classList.contains('hidden') && !mm.contains(e.target) && e.target !== mt) {
+            mm.classList.add('hidden'); mt.setAttribute('aria-expanded', 'false');
+          }
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') { mm.classList.add('hidden'); mt.setAttribute('aria-expanded', 'false'); }
+        });
+      }
     })();
   </script>
 </body>

@@ -10,16 +10,9 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- SITE FONTS: replace this whole <link> with the live site's font import so faces match. -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* =====================================================================
-     SITE TOKENS  —  REPLACE THESE WITH THE LIVE SITE'S REAL VALUES.
-     Identical to the builders.html token block on purpose, so the two new
-     pages stay in sync. Copy the real colour variables (and the fonts
-     above) from the existing site CSS so this page matches exactly.
-     Every colour on the page derives from the variables below.
-     ===================================================================== */
+  /* Site tokens — matched to teraustralis.com.au (space/violet/pink/amber/ink/silver) and Inter + Space Grotesk. */
   :root{
     --space:#08070F;
     --space-2:#100E1B;
@@ -172,6 +165,21 @@
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
   .reveal.in{opacity:1;transform:none}
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}*{animation:none!important}}
+
+  /* "More" nav dropdown */
+  .nav-more{position:relative}
+  .nav-more-btn{background:none;border:0;padding:0;color:var(--ink-dim);font-family:"Inter",ui-sans-serif,system-ui,sans-serif;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:color .2s}
+  .nav-more-btn:hover{color:var(--ink)}
+  .nav-more-btn.current{color:var(--star)}
+  .nav-more-menu{display:none;position:absolute;right:0;top:100%;margin-top:10px;min-width:220px;background:var(--space-2);border:1px solid var(--line);border-radius:8px;padding:8px;box-shadow:0 12px 30px rgba(0,0,0,.4);z-index:150}
+  .nav-more-menu.open{display:flex;flex-direction:column}
+  .nav-more-menu a{padding:9px 12px;border-radius:6px;font-size:14px;color:var(--ink-dim);transition:color .2s,background .2s}
+  .nav-more-menu a:hover{background:var(--space-3);color:var(--ink)}
+  .nav-more-menu a.current{color:var(--star)}
+  @media(max-width:860px){
+    .nav-more-menu{position:static;margin-top:4px;border:0;background:none;box-shadow:none;padding:0 0 8px 28px}
+    .nav-more-btn{width:100%;justify-content:space-between;padding:12px 28px}
+  }
 </style>
 </head>
 <body>
@@ -179,15 +187,24 @@
 
 <header class="site">
   <div class="wrap nav">
-    <a class="brand" href="https://www.teraustralis.com.au/index.html">TerAustralis Incognita<span class="dot">.</span></a>
+    <a class="brand" href="index.html">TerAustralis Incognita<span class="dot">.</span></a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="navlinks">menu</button>
     <nav class="nav-links" id="navlinks">
-      <a href="https://www.teraustralis.com.au/index.html">Home</a>
-      <a href="#main" class="current">Vision</a>
-      <a href="https://www.teraustralis.com.au/foundations.html">Foundations</a>
-      <a href="https://www.teraustralis.com.au/approach.html">Approach</a>
-      <a href="https://www.teraustralis.com.au/concepts.html">Concepts</a>
-      <a href="https://www.teraustralis.com.au/get-involved.html">Get Involved</a>
+      <a href="index.html">Home</a>
+      <a href="vision.html">Vision</a>
+      <div class="nav-more">
+        <button type="button" class="nav-more-btn current" id="moreToggle" aria-haspopup="true" aria-expanded="false" aria-controls="moreMenu">More <span aria-hidden="true">&#9662;</span></button>
+        <div class="nav-more-menu" id="moreMenu" role="menu">
+          <a href="foundations.html" role="menuitem">Foundations</a>
+          <a href="approach.html" role="menuitem">Approach</a>
+          <a href="momentum.html" role="menuitem">Momentum</a>
+          <a href="vision-songlines-to-starlines.html" role="menuitem" class="current" aria-current="page">Songlines to Starlines</a>
+          <a href="support.html" role="menuitem">Support</a>
+          <a href="concepts.html" role="menuitem">Concepts</a>
+          <a href="builders.html" role="menuitem">Builders</a>
+        </div>
+      </div>
+      <a href="get-involved.html">Get Involved</a>
     </nav>
   </div>
 </header>
@@ -240,7 +257,7 @@
         <div class="name">
           <span class="tag">The reasoning layer</span>
           <h3>CrystalCore</h3>
-          <p>The project's technology spine — a real, consent-aware reasoning framework, currently in development. Described honestly on the <a href="https://www.teraustralis.com.au/index.html">builders page</a>; vision and engineering kept clearly apart.</p>
+          <p>The project's technology spine — a real, consent-aware reasoning framework, currently in development. Described honestly on the <a href="builders.html">builders page</a>; vision and engineering kept clearly apart.</p>
         </div>
         <div class="name">
           <span class="tag">The emblem</span>
@@ -361,8 +378,8 @@
       <h2>A new Australia, dreamed into reality.</h2>
       <p>If this vision speaks to you — in code, culture, policy, art, or simply belief — there's a place for you in it.</p>
       <div class="cta-row">
-        <a class="btn btn-primary" href="https://www.teraustralis.com.au/get-involved.html">Get Involved</a>
-        <a class="btn btn-ghost" href="https://www.teraustralis.com.au/concepts.html">See the Concept Art</a>
+        <a class="btn btn-primary" href="get-involved.html">Get Involved</a>
+        <a class="btn btn-ghost" href="concepts.html">See the Concept Art</a>
       </div>
     </div>
   </section>
@@ -380,17 +397,22 @@
       <div class="foot-col">
         <h4>Explore</h4>
         <ul>
-          <li><a href="https://www.teraustralis.com.au/index.html">Home</a></li>
-          <li><a href="https://www.teraustralis.com.au/foundations.html">Foundations</a></li>
-          <li><a href="https://www.teraustralis.com.au/concepts.html">Concepts</a></li>
-          <li><a href="https://www.teraustralis.com.au/get-involved.html">Get Involved</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="vision.html">Vision</a></li>
+          <li><a href="vision-songlines-to-starlines.html">Songlines to Starlines</a></li>
+          <li><a href="foundations.html">Foundations</a></li>
+          <li><a href="approach.html">Approach</a></li>
+          <li><a href="momentum.html">Momentum</a></li>
+          <li><a href="concepts.html">Concepts</a></li>
+          <li><a href="builders.html">Builders</a></li>
+          <li><a href="get-involved.html">Get Involved</a></li>
         </ul>
       </div>
       <div class="foot-col">
         <h4>Connect</h4>
         <ul>
           <li><a href="https://secondfounding.com.au">Second Founding</a></li>
-          <li><a href="https://www.teraustralis.com.au/support.html">Support the mission</a></li>
+          <li><a href="support.html">Support the mission</a></li>
         </ul>
       </div>
     </div>
@@ -401,6 +423,26 @@
 
 <script>
   (function(){var btn=document.querySelector('.nav-toggle');var links=document.getElementById('navlinks');if(btn&&links){btn.addEventListener('click',function(){var open=links.classList.toggle('open');btn.setAttribute('aria-expanded',open?'true':'false');});}})();
+
+  (function(){
+    var mt=document.getElementById('moreToggle'), mm=document.getElementById('moreMenu');
+    if(mt&&mm){
+      mt.addEventListener('click',function(e){
+        e.stopPropagation();
+        var open=mm.classList.toggle('open');
+        mt.setAttribute('aria-expanded', open?'true':'false');
+      });
+      document.addEventListener('click',function(e){
+        if(mm.classList.contains('open') && !mm.contains(e.target) && e.target!==mt){
+          mm.classList.remove('open'); mt.setAttribute('aria-expanded','false');
+        }
+      });
+      document.addEventListener('keydown',function(e){
+        if(e.key==='Escape'){ mm.classList.remove('open'); mt.setAttribute('aria-expanded','false'); }
+      });
+    }
+  })();
+
   (function(){var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;var els=document.querySelectorAll('.reveal');if(reduce||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:0.14});els.forEach(function(e){io.observe(e)});})();
   (function(){
     var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
